@@ -42,7 +42,6 @@ using namespace std;
 #define ps(x,y) fixed<<setprecision(y)<<x
 
 //Typedef
-// typedef long long int;
 typedef long long ll;
 typedef unsigned long long ull;
 typedef long double lld;
@@ -107,42 +106,33 @@ void getv(vl &vec ){ for (int i=0;i<vec.size();i++)cin>>vec[i]; }
 void getv(vl &vec,int n ){ for (int i=0;i<n;i++)cin>>vec[i]; }
 void printv(vl & vec){for(auto i:vec){cout<<i<<' ';}cout<<endl;}
 void printv(vi & vec){for(auto i:vec){cout<<i<<' ';}cout<<endl;}
-// ll fact[200000]={-1};
-ll ncr(ll n,ll r){
-    // r=min(r,n-r);
-    ll nu = 1,de=1;
-    for(int i=r+1;i<=n;i++)nu*=i;
-    for(int i=1;i<=n-r;i++)de*=i;
-    return nu/de;
-}
+
 void solve()
 {
-    // int n;
-    // cin>>n;
-    int n , k , q;
-    cin>>n>>k>>q    ;
-    vl a(n);
-    getv(a);
-    int prev=0;
-    ll ans = 0;
-    // cout<<ncr(5,5)<<endl;
+    
+    int n,minLen;
+    cin>>n>>minLen;
+    string s;
+    cin>>s;
+    vl cntOfBlack(s.size(),0);
     int cnt = 0;
-    for(int i=0;i<n;i++){
-        if(a[i]<=q){
-            cnt++;
-            if(cnt>=k){
-                ans+=cnt-k+1;
-            }
-        }else{
-            cnt=0;
+    ll ans = minLen;
+    for(int i =0;i<n;i++){
+        if(s[i]=='B')cnt++;
+        cntOfBlack[i]=cnt;
+        if(i==minLen-1){
+            ans = i+1-cnt; 
+        }
+        else if(i>=minLen){
+            ans = min(ans,minLen-cnt+cntOfBlack[i-minLen]);
         }
     }
-    
     cout<<ans<<endl;
+
 }
 
 
-int main()
+int32_t main()
 {
     fastio()
     #ifndef ONLINE_JUDGE

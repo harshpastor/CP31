@@ -42,7 +42,6 @@ using namespace std;
 #define ps(x,y) fixed<<setprecision(y)<<x
 
 //Typedef
-// typedef long long int;
 typedef long long ll;
 typedef unsigned long long ull;
 typedef long double lld;
@@ -107,42 +106,45 @@ void getv(vl &vec ){ for (int i=0;i<vec.size();i++)cin>>vec[i]; }
 void getv(vl &vec,int n ){ for (int i=0;i<n;i++)cin>>vec[i]; }
 void printv(vl & vec){for(auto i:vec){cout<<i<<' ';}cout<<endl;}
 void printv(vi & vec){for(auto i:vec){cout<<i<<' ';}cout<<endl;}
-// ll fact[200000]={-1};
-ll ncr(ll n,ll r){
-    // r=min(r,n-r);
-    ll nu = 1,de=1;
-    for(int i=r+1;i<=n;i++)nu*=i;
-    for(int i=1;i<=n-r;i++)de*=i;
-    return nu/de;
+void rotate(vl & vec){
+
 }
 void solve()
 {
-    // int n;
-    // cin>>n;
-    int n , k , q;
-    cin>>n>>k>>q    ;
+    int n;
+    cin>>n;
     vl a(n);
     getv(a);
-    int prev=0;
-    ll ans = 0;
-    // cout<<ncr(5,5)<<endl;
-    int cnt = 0;
-    for(int i=0;i<n;i++){
-        if(a[i]<=q){
-            cnt++;
-            if(cnt>=k){
-                ans+=cnt-k+1;
-            }
-        }else{
-            cnt=0;
+    vl ans(n);
+    int i = 0;
+    while(i<n){
+        int j = i+1;
+        while(j<n && a[j]==a[i])j++;
+        if(j==i+1){
+            cout<<-1<<endl;
+            return;
         }
+        else{
+            ans[i]=j;
+            i++;
+            while(i<n && i<=j){
+                ans[i]=i;
+                i++;
+            }
+        }
+
     }
+    printv(ans);
+
     
-    cout<<ans<<endl;
+    //club the similar elements
+    //rotate;
+    
+
 }
 
 
-int main()
+int32_t main()
 {
     fastio()
     #ifndef ONLINE_JUDGE
