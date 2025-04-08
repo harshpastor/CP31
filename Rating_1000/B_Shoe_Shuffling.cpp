@@ -127,7 +127,7 @@ void solve()
         else{
             ans[i]=j;
             i++;
-            while(i<n && i<=j){
+            while(i<n && i<j){
                 ans[i]=i;
                 i++;
             }
